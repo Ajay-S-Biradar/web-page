@@ -1,0 +1,9 @@
+nav ul{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: center;
+    list-style: none;
+    font-size: 4dvh;
+    outline-style:ridge;
+}
