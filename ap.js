@@ -6,6 +6,7 @@ const path = require('path')
 const nodemailer = require('nodemailer')
 var otp 
 var MAIL 
+const PORT = 5000 
 app.use(express.urlencoded({extended:false}))
 
 app.set('view engine', 'pug');
@@ -17,8 +18,6 @@ const transporter = nodemailer.createTransport({
       pass: "lqhvdmghcavraxop"
     }
 })
-
-
 async function connectToMongoDB() {
     try {
       await mongoose.connect('mongodb+srv://sbmunnu:munnu@mongo.mzaad3h.mongodb.net/<dbname>?retryWrites=true&w=majority', {
@@ -44,10 +43,14 @@ const userSchema = new Schema({
     }
 })
 // console.log("hii") 
-
 const User = mongoose.model('User', userSchema)
 
 // app.get('/otp',(res,))
+
+app.get('/test',(req,res)=>{
+  message = "hiii"
+  res.render('test')
+})
 
 app.get('/',(req,res)=>{
   message = "hiii"
@@ -57,6 +60,7 @@ app.get('/',(req,res)=>{
 app.get('/login',(req,res) =>{
   message = "hiii"
   res.sendFile(path.join(__dirname,'login.html'))
+  res.render('login')
 })
 
 app.post('/login',(req,res)=>{
@@ -73,10 +77,12 @@ app.post('/login',(req,res)=>{
       }
       else{
         console.log('password and username not matched')
+        res.render('login',{message:"invalid user name and password"})
       }
     } else {
       // User does not exist in the database 
       console.log('User not found');
+      res.render('login',{message:"true"})
       // Perform actions for non-existing user
     }
 
@@ -86,14 +92,11 @@ app.post('/login',(req,res)=>{
   })
   // console.log(req.body)
 })
-
 app.get('/otp',(req,res)=>{
     otp = Math.floor(100000 + Math.random() * 900000);
     console.log(otp)
-
     res.sendFile(path.join(__dirname, 'otp.html'))
 })
-
 app.post('/otp',(req,res)=>{ 
   MAIL = req.body.mail 
   const mailOptions = {
@@ -113,11 +116,9 @@ app.post('/otp',(req,res)=>{
       }
   });
 })
-
 app.get('/signup',(req,res)=>{
   res.sendFile(path.join(__dirname,'test.html'))
 })
-
 app.post('/signup',(req,res)=>{
     if(otp==req.body.otp){
     var newUser = {
@@ -137,12 +138,12 @@ app.post('/signup',(req,res)=>{
         console.log("not valid otp")
     }
 })
-
 app.get('/user',(req,res)=>{
   message = "u r logged in"
   res.render('main',{message})
 })
 
-app.listen(3000,()=>{
+// app.listen(3000,()=>{
+app.listen(5000,()=>{
     console.log("running")
 })

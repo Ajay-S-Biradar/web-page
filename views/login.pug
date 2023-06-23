@@ -1,0 +1,36 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet', href='static/login.css')
+  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.5.0/css/all.css', integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU', crossorigin='anonymous')
+  title login
+  #alert-message
+.screen
+  |please fill out the details
+  .container
+    .screen_content
+      form#login.login(action='/login', method='post', name='myForm')
+        .login__field
+          i.login__icon.fas.fa-user
+          input.login__input(type='text', name='name', required='', placeholder='User name / Email')
+        .login__field
+          i.login__icon.fas.fa-lock
+          input.login__input(type='password', required='', name='password', placeholder='Password')
+        button(type='submit') Submit
+        p
+          | new user 
+          a(href='/otp') signup
+script.
+      window.addEventListener("load", function() {
+        var message = #{message};
+        if(message){
+        var alertMessageElement = document.getElementById("alert-message");
+        alertMessageElement.innerText = "user not found";
+        alertMessageElement.style.display = "block";
+        setTimeout(function(){
+          alertMessageElement.style.display = "none";
+        }, 3000);
+        }
+      });
