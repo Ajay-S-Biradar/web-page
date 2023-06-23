@@ -6,6 +6,7 @@ const path = require('path')
 const nodemailer = require('nodemailer')
 var otp 
 var MAIL 
+const PORT = 5000 
 app.use(express.urlencoded({extended:false}))
 
 app.set('view engine', 'pug');
@@ -49,6 +50,11 @@ const User = mongoose.model('User', userSchema)
 
 // app.get('/otp',(res,))
 
+app.get('/test',(req,res)=>{
+  message = "hiii"
+  res.render('test')
+})
+
 app.get('/',(req,res)=>{
   message = "hiii"
   res.render('main',{message})
@@ -56,7 +62,7 @@ app.get('/',(req,res)=>{
 
 app.get('/login',(req,res) =>{
   message = "hiii"
-  res.sendFile(path.join(__dirname,'login.html'))
+  res.render('login')
 })
 
 app.post('/login',(req,res)=>{
@@ -73,10 +79,12 @@ app.post('/login',(req,res)=>{
       }
       else{
         console.log('password and username not matched')
+        res.render('login',{message:"invalid user name and password"})
       }
     } else {
       // User does not exist in the database 
       console.log('User not found');
+      res.render('login',{message:"true"})
       // Perform actions for non-existing user
     }
 
@@ -143,6 +151,6 @@ app.get('/user',(req,res)=>{
   res.render('main',{message})
 })
 
-app.listen(3000,()=>{
+app.listen(process.env.PORT,()=>{
     console.log("running")
 })
