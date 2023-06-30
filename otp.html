@@ -1,11 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>otp</title>
-    <link rel="stylesheet" href="static/login.css">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <title>login</title>
 </head>
 <body>
     <form action="/otp" method="post">
@@ -13,20 +11,5 @@
         <!-- <input type="text" name="password"> -->
         <button>get otp</button>
     </form>
-    <div class="screen">
-     <div id="message">please fill out the details</div>
-        <div class="container">
-            <div class="screen_content">
-                <form class="otp" action="/otp"  method="post" id="otp" name="myForm">
-                    <div class="login__field">
-                        <i class="login__icon "></i>
-                        <input type="text" class="login__input" name = "name" required placeholder="Email" >
-                    </div>            
-                    <button type="submit">Generate OTP</button>
-                </form>
-            </div>
-        </div>
-    </div>
 </body>
-
 </html>
